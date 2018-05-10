@@ -37,14 +37,17 @@ app.use(convert(cors({
 })))
 
 // routers
-app = require('./private')(app)
-app = require('./public')(app)
 
-app.use(jwt({
-  secret: token
-}).unless({
-  path: [/^\/public/]
-}));
+/* Public ROUTES */
+app = require('./public')(app)
+/* -- --- --- */
+
+/* TODAS ROTAS ABAIXO DO jwt NECESSITAM UM token PARA SEREM CONSUMIDAS */
+app.use(jwt({ secret: token }));
+
+/* PRIVATE ROUTES */
+app = require('./private')(app)
+/* -- --- --- */
 
 // start
 db.connection.on('connected', () => {
