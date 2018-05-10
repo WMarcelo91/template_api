@@ -1,5 +1,7 @@
 //db
 require('./src/config/mongoose')()
+const db = require('./db')
+
 
 // lib's
 const http = require('http')
@@ -45,6 +47,8 @@ app.use(jwt({
 }));
 
 // start
-http.createServer(app.callback()).listen(port, () => {
-  logger.info(`Server Template listening at http://localhost:${port}/api/`)
+db.connection.on('connected', () => {
+  http.createServer(app.callback()).listen(port, () => {
+    logger.info(`Server Template listening at http://localhost:${port}/api/`)
+  })
 })

@@ -6,8 +6,8 @@ const active = true
 
 module.exports = () => [
 	new Users({
-		name  : 'Wellington mMrcelo',
+		name  : 'Wellington Marcelo',
 		email: 'wellington-marcelo@hotmail.com',
-		password 
+		password
 	})
 ]
